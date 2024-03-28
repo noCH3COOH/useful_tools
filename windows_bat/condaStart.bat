@@ -1,0 +1,1 @@
+cmd /k "cd /d %~dp0 && conda -V && conda activate && CLS && conda env list && echo RUN -python train.py init- 来初始化你的训练文件夹 && echo RUN -python train.py -t classifier -z 你的数据集压缩包路径 train- 来训练数据分类的模型 && echo RUN -python train.py -t detector -z 你的数据集压缩包路径 train- 来训练目标检测的模型"
