@@ -9,7 +9,12 @@ def analysis_file(path):
     his_fileExt = [] 
     global tree_str
 
-    generate_fileTree(path, 0)
+    tem = os.listdir(".")
+
+    for dir in tem:
+        dirname = dir.split('/')[-1]
+        if not (dirname.startswith('.') or dirname.startswith('__') or '.' in dirname):
+            generate_fileTree(dir, 1)
 
     for subdir, dirs, files in os.walk(path):
         if not files:
@@ -32,14 +37,12 @@ def analysis_file(path):
 def generate_fileTree(path, n=0):
     global tree_str
     target = Path(path)
-
-    if target.is_file():
-        tree_str += '    |' * n + '-' * 4 + target.name + '   (' + calcu_size(os.path.getsize(path)) + ')' +  '\n'
-    elif target.is_dir():
-        if not target.name.startswith('.') and not target.name.startswith("__"):
+    
+    if target.is_dir():
+        if (not target.name.startswith('.')) and (not target.name.startswith("__")):
             tree_str += '    |' * n + '-' * 4 + str(target.relative_to(target.parent)) + '\n'
-        for cp in target.iterdir():
-            generate_fileTree(cp, n + 1)
+            for cp in target.iterdir():
+                generate_fileTree(cp, n + 1)
 
 def calcu_size(size):
     count = 0
