@@ -4,3 +4,5 @@ python/readmeGenerate/__pycache__/
 python/readmeGenerate/log.txt
 
 log.txt
+
+__pycache__
