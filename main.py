@@ -26,7 +26,7 @@ if __name__ == "__main__":
     for type in type_exist_dir:
         for dir in os.listdir(type):
             tool_name.append(dir)
-            tool_dir.append('.\\' + type + '\\' + dir)
+            tool_dir.append('./' + type + '/' + dir)
     
     print("You have the following tools: ")
     for i in range(len(tool_name)):
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     print("You have selected the tool: " + tool_name[tool_num])
 
     if "python" in tool_dir[tool_num]:
-        os.system("python " + tool_dir[tool_num] + '\\main' + ".py")
+        os.system("python " + tool_dir[tool_num] + '/main' + ".py")
     elif "windows_bat" in tool_dir[tool_num]:
-        os.system(tool_dir[tool_num] + '\\main' + ".bat")
+        os.system(tool_dir[tool_num] + '/main' + ".bat")
     
