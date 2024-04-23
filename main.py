@@ -44,7 +44,11 @@ if __name__ == "__main__":
     print("You have selected the tool: " + tool_name[tool_num])
 
     if "python" in tool_dir[tool_num]:
-        os.system("python " + tool_dir[tool_num] + '/main' + ".py")
+        cmd = "python " + tool_dir[tool_num] + '/main' + ".py"
     elif "windows_bat" in tool_dir[tool_num]:
-        os.system(tool_dir[tool_num] + '/main' + ".bat")
+        cmd = tool_dir[tool_num] + '/main' + ".bat"
+        cmd = cmd.replace('/', '\\')
+    
+    print(cmd)
+    os.system(cmd)
     
