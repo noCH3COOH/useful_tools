@@ -53,7 +53,9 @@ if __name__ == "__main__":
     # 输出
     output_P = [round(r, 3) for r in output_P]
     
-    for p, symbol, encode_r, encode_r_len in zip(output_P, [("$P_{" + symbol + "}$") for symbol in output_P_symbol], encode_output_P, encode_output_P_len):
-        make_log("概率：" + str(p) + " 对应码元：" + str(symbol) + " 对应霍夫曼编码：" + str(encode_r) + " 对应码长：" + str(encode_r_len))
+    make_log('|概率|码元|霍夫曼编码|码长|')
+    make_log('|:-:|:-:|:-:|:-:|')
+    for p, symbol, encode_r, encode_r_len in zip(output, [("$P_{" + symbol + "}$") for symbol in output_symbol], encode_output, encode_output_len):
+        make_log("|" + str(p) + "|" + str(symbol) + "|" + str(encode_r) + "|" + str(encode_r_len) + "|")
     
     
