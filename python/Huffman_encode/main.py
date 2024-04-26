@@ -14,14 +14,14 @@ def make_log(str):
 
 if __name__ == "__main__":
 
-    D = 3 # n元编码
-    P_1 = [(1/12), (1/12), (1/12), (1/12), (1/12), (1/12), (1/12), (1/12), (1/12), (1/12), (1/12), (1/12)]
+    D = 2 # n元编码
+    P_1 = [(1/3), (1/6), (1/6), (1/9), (1/9), (1/9)]
     
     output_P, output_P_symbol, encode_output_P, encode_output_P_len = hf.encode(P_1, D)
     
     make_log("【编码报告】")
     
-    # 计算平均码长
+    # 计算平均码长、平均信息熵、编码效率
     average_len = 0
     H_U = 0
     for p, lenght in zip(output_P, encode_output_P_len):
@@ -29,7 +29,8 @@ if __name__ == "__main__":
         H_U += (- (p*math.log2(p)) )
     
     make_log("平均码长：" + str(average_len))
-    make_log("编码效率：" + str(H_U / (average_len * math.log2(D)) * 100) + "%")
+    make_log("平均信息熵：" + str(H_U))
+    make_log("编码效率：" + str( (H_U / average_len) * 100 ) + "%")
     
     # 判断是否唯一可译码
     flag = 0
@@ -41,12 +42,14 @@ if __name__ == "__main__":
                 break
     
     if 0 == flag:
-        make_log("唯一可译码")
+        make_log("唯一可译码：是")
+    else:
+        make_log("唯一可译码：否")
     
     # 计算编码的方差
     sigma_I = 0
     for p in output_P:
-        sigma_I += p*(((-math.log2(p)) - H_U) ** 2 )
+        sigma_I += p*(((-math.log2(p)) - H_U) * ((-math.log2(p)) - H_U) )
     
     make_log("方差：" + str(sigma_I))
     
@@ -55,7 +58,7 @@ if __name__ == "__main__":
     
     make_log('|概率|码元|霍夫曼编码|码长|')
     make_log('|:-:|:-:|:-:|:-:|')
-    for p, symbol, encode_r, encode_r_len in zip(output, [("$P_{" + symbol + "}$") for symbol in output_symbol], encode_output, encode_output_len):
+    for p, symbol, encode_r, encode_r_len in zip(output_P, [("$P_{" + symbol + "}$") for symbol in output_P_symbol], encode_output_P, encode_output_P_len):
         make_log("|" + str(p) + "|" + str(symbol) + "|" + str(encode_r) + "|" + str(encode_r_len) + "|")
     
     
